@@ -32,18 +32,19 @@ Init = () => {
 
   renderer = new THREE.WebGLRenderer({ alpha: true });
   renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setSize(window.innerWidth, window.innerHeight - 100);
   renderer.setClearColor(0xcccccc, 0);
 
   // documentにMMDをセットする
-  document.body.appendChild(renderer.domElement);
+  document.querySelector('#three').appendChild(renderer.domElement);
 
   //cameraの作成
   camera = new THREE.PerspectiveCamera(40, windowWidth / windowHeight, 1, 1000);
-  camera.position.set(0, 100, 70);
+  camera.position.set(0, 50, 70);
 
   // カメラコントローラーを作成
   const controls = new THREE.OrbitControls(camera);
+  controls.target.set(0, 8, 0);
 };
 
 /*
@@ -182,7 +183,7 @@ VmdControl = (id, loop) => {
   // VMD Loop Once Event
   mixer.addEventListener('finished', (event) => {
     console.log('finished');
-    VmdControl('Signalize!', true);
+    // VmdControl('Signalize!', true);
   });
 
   ready = true;
@@ -226,7 +227,7 @@ PoseClickEvent = (id) => {
 
   switch (id) {
     case 'Signalize!':
-      VmdControl('Signalize!', true);
+      VmdControl('Signalize!', false);
       break;
   }
 };
