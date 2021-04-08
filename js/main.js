@@ -137,7 +137,7 @@ LoadModeler = async () => {
   );
 
   //Set VMD on Mesh
-  VmdControl('Signalize!', true);
+  // VmdControl('Signalize!', true);
 };
 
 /*
@@ -164,6 +164,7 @@ VmdControl = (id, loop) => {
 
   //Start Audio
   if (MotionObjects[index].AudioClip) {
+    console.log('audio play');
     MotionObjects[index].AudioClip.play();
   }
 
@@ -181,7 +182,7 @@ VmdControl = (id, loop) => {
   // VMD Loop Once Event
   mixer.addEventListener('finished', (event) => {
     console.log('finished');
-    VmdControl('loop', true);
+    VmdControl('Signalize!', true);
   });
 
   ready = true;
@@ -221,8 +222,10 @@ Render = () => {
  * Click Event
  */
 PoseClickEvent = (id) => {
+  console.log(id);
+
   switch (id) {
-    default:
+    case 'Signalize!':
       VmdControl('Signalize!', true);
       break;
   }
